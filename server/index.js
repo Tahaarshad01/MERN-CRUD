@@ -20,8 +20,8 @@ const Register = require("./model/regis.js");
 app.post("/register", async (req, res) => {
   const { name, email, password, conPassword, mobile, address } = req.body;
   const saltRound = 10;
-  const hashPass = await bcrypt.hashSync(password, saltRound);
-  const hashConPass = await bcrypt.hashSync(conPassword, saltRound);
+  const hashPass = bcrypt.hashSync(password, saltRound);
+  const hashConPass = bcrypt.hashSync(conPassword, saltRound);
   const registerData = await Register({
     name,
     email,
