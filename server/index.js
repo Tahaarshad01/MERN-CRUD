@@ -16,6 +16,16 @@ require("./db/conn.js");
 ///conneting model///
 const Register = require("./model/regis.js");
 
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://amazing-gelato-4767de.netlify.app"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 //insert api///
 app.post("/register", async (req, res) => {
   const { name, email, password, conPassword, mobile, address } = req.body;

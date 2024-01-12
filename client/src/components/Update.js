@@ -16,7 +16,7 @@ function Update() {
     getDetails();
   }, []);
   const getDetails = async () => {
-    await fetch("https://crud-operaions.onrender.com/getDetails/" + params.id)
+    await fetch("https://crudd-id2m.onrender.com/getDetails/" + params.id)
       .then((res) => res.json())
       .then((rec) => {
         console.log(rec);
@@ -51,7 +51,7 @@ function Update() {
   const submitData = () => {
     const { name, email, password, conPassword, mobile, address } = state;
     if (password === conPassword) {
-      fetch(`https://crud-operaions.onrender.com/update/${params.id}`, {
+      fetch(`https://crudd-id2m.onrender.com/update/${params.id}`, {
         method: "PUT",
         body: JSON.stringify({
           name,

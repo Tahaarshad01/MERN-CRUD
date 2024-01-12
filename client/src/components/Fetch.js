@@ -6,7 +6,7 @@ function Fetch() {
         getAll();
     }, []);
     const getAll = async () => {
-        await fetch("https://crud-operaions.onrender.com/fetch")
+        await fetch("https://crudd-id2m.onrender.com/fetch")
             .then(res => res.json())
             .then(rec => {
                 console.log(rec)
@@ -15,7 +15,7 @@ function Fetch() {
             .catch(() => console.log("Api call error"))
     }
     const deletedata = async (id) => {
-        let dele = await fetch(`https://crud-operaions.onrender.com/delete/${id}`, {
+        let dele = await fetch(`https://crudd-id2m.onrender.com/delete/${id}`, {
             method: 'DELETE',
         });
         if (dele.ok) {
