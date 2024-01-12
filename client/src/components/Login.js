@@ -13,7 +13,7 @@ function Login() {
         const { email, password } = state
         if (email && password) {
 
-            const userExist = await fetch('http://localhost:5000/login', {
+            const userExist = await fetch('https://crud-operaions.onrender.com/login', {
                 method: "POST",
                 body: JSON.stringify({ email, password }),
                 headers: {

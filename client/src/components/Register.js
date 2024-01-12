@@ -35,7 +35,7 @@ function Register() {
   const submitData = () => {
     const { name, email, password, conPassword, mobile, address } = state;
     if (password === conPassword) {
-      fetch("http://localhost:5000/register", {
+      fetch("https://crud-operaions.onrender.com/register", {
         method: "POST",
         body: JSON.stringify({
           name,
