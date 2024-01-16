@@ -5,7 +5,7 @@ var jwtkey = "jwtkey";
 const bcrypt = require("bcrypt");
 // to recieve the body data //
 app.use(express.json());
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 const cors = require("cors");
 app.use(cors());
 
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     "https://amazing-gelato-4767de.netlify.app"
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("https://fanciful-profiterole-6b0d4c.netlify.app");
   next();
 });
 
@@ -106,7 +106,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`server running on port ${port}`);
-  console.log(`http:localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`server running on port ${PORT}`);
+  console.log(`http:localhost:${PORT}`);
 });

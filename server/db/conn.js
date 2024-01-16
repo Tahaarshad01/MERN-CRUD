@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/BACKEND')
+const dotenv = require("dotenv")
+
+dotenv.config();
+const URI = process.env.MONGO_URI
+
+mongoose.connect(URI, { useNewUrlParser: true })
 
 .then(()=>{
     console.log("database is connected")
