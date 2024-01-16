@@ -17,12 +17,10 @@ require("./db/conn.js");
 const Register = require("./model/regis.js");
 
 app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://amazing-gelato-4767de.netlify.app"
-  );
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("https://fanciful-profiterole-6b0d4c.netlify.app");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Credentials", true);
   next();
 });
 
