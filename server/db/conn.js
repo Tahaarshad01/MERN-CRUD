@@ -3,7 +3,6 @@ const dotenv = require("dotenv")
 
 dotenv.config();
 const URI = process.env.MONGO_URI
-
 mongoose.connect(URI, { useNewUrlParser: true })
 
 .then(()=>{

@@ -5,7 +5,7 @@ var jwtkey = "jwtkey";
 const bcrypt = require("bcrypt");
 // to recieve the body data //
 app.use(express.json());
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 const cors = require("cors");
 app.use(cors());
 
@@ -17,15 +17,16 @@ require("./db/conn.js");
 const Register = require("./model/regis.js");
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", ["OPTIONS","GET, POST, PUT, DELETE"]);
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", true);
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
   }
   next();
-}); 
+});
+
 
 //insert api///
 app.post("/register", async (req, res) => {
