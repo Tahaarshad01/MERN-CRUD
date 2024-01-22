@@ -5,7 +5,7 @@ var jwtkey = "jwtkey";
 const bcrypt = require("bcrypt");
 // to recieve the body data //
 app.use(express.json());
-const PORT = process.env.PORT || 10000;
+const port = 5000;
 const cors = require("cors");
 app.use(cors());
 
@@ -16,24 +16,12 @@ require("./db/conn.js");
 ///conneting model///
 const Register = require("./model/regis.js");
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", true);
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
-
 //insert api///
 app.post("/register", async (req, res) => {
   const { name, email, password, conPassword, mobile, address } = req.body;
   const saltRound = 10;
-  const hashPass = bcrypt.hashSync(password, saltRound);
-  const hashConPass = bcrypt.hashSync(conPassword, saltRound);
+  const hashPass = await bcrypt.hashSync(password, saltRound);
+  const hashConPass = await bcrypt.hashSync(conPassword, saltRound);
   const registerData = await Register({
     name,
     email,
@@ -108,7 +96,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`);
-  console.log(`http:localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`server running on port ${port}`);
+  console.log(`http:localhost:${port}`);
 });
