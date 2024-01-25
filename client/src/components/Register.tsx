@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
-import { useParams } from "react-router-dom";
-function Update() {
-  const params = useParams();
-  // console.log(params.id);
-  const [state, setState] = useState({
+import { RegesterData } from "@tahaarshad/common";
+
+
+function Register() {
+  const [state, setState] = useState<RegesterData>({
     name: "",
     email: "",
     password: "",
@@ -12,19 +12,6 @@ function Update() {
     mobile: "",
     address: "",
   });
-  useEffect(() => {
-    getDetails();
-  }, []);
-  const getDetails = async () => {
-    await fetch("https://crudd-id2m.onrender.com/getDetails/" + params.id)
-      .then((res) => res.json())
-      .then((rec) => {
-        console.log(rec);
-        setState(rec);
-      })
-      .catch(() => console.log("api call error"));
-  };
-
   //show and hide password ////
   const [pass, setPass] = useState({
     type: "password",
@@ -45,14 +32,14 @@ function Update() {
       ? setCPass({ type: "text", CbtnName: "Hide password" })
       : setCPass({ type: "password", CbtnName: "show password" });
   };
-  const handler = (e) => {
+  const handler = (e: any) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   const submitData = () => {
     const { name, email, password, conPassword, mobile, address } = state;
     if (password === conPassword) {
-      fetch(`http://localhost:5000/update/${params.id}`, {
-        method: "PUT",
+      fetch("http://localhost:5000/register", {
+        method: "POST",
         body: JSON.stringify({
           name,
           email,
@@ -69,20 +56,24 @@ function Update() {
         .then((json) => {
           console.log(json);
           setState(json);
-          document.getElementById("result").innerHTML =
-            "Update successfully!!!";
+
+          const resultElement = document.getElementById(
+            "result"
+          ) as HTMLDivElement | null;
+          if (resultElement) {
+            resultElement.innerHTML = "Now you are our community";
+          }
         })
         .catch(() => console.log("api call error"));
     } else {
-      document.getElementById("result").innerHTML =
-        "Password and Confirm password dosent match";
+      console.log("Password and Confirm password dosent match");
     }
   };
   return (
     <>
       <section className="m-5">
         <div className="m-5">
-          <div className="text-center fs-2 mb-4 fw-bold">Update Data</div>
+          <div className="text-center fs-2 mb-4 fw-bold">Register Here...</div>
           <form>
             <input
               type="text"
@@ -138,7 +129,7 @@ function Update() {
               className="form-control p-2 px-3 my-3"
               placeholder="Your ConfirmPassword.."
               name="conPassword"
-              value={state.ConPassword}
+              value={state.conPassword}
               onChange={handler}
             />
 
@@ -157,21 +148,22 @@ function Update() {
 
             <div className="form-group mb-3">
               <textarea
-                type="address"
                 className="form-control"
-                rows="3"
+                // type="address"
+                rows={3}
                 placeholder="Your Address Here.."
                 name="address"
                 value={state.address}
                 onChange={handler}
               />
             </div>
+
             <button
               type="button"
               onClick={submitData}
               className="btn fw-bold btn-primary w-100"
             >
-              Update Data
+              Submit
             </button>
           </form>
           <div
@@ -183,4 +175,4 @@ function Update() {
     </>
   );
 }
-export default Update;
+export default Register;

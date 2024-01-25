@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {IData} from "@tahaarshad/common"
+
+
 function Fetch() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<IData[]>([]);
   useEffect(() => {
     getAll();
   }, []);
@@ -14,7 +17,7 @@ function Fetch() {
       })
       .catch(() => console.log("Api call error"));
   };
-  const deletedata = async (id) => {
+  const deletedata = async (id: string) => {
     let dele = await fetch(`http://localhost:5000/delete/${id}`, {
       method: "DELETE",
     });

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from './components/Register';
-import Navbar from './components/Navbar';
-import Fetch from './components/Fetch';
-import Login from './components/Login';
-import Update from './components/Update';
-import Private from './components/Private';
+import Register from "./components/Register";
+import Navbar from "./components/Navbar";
+import Fetch from "./components/Fetch";
+import Login from "./components/Login";
+import Update from "./components/Update";
+import Private from "./components/Private";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +19,6 @@ function App() {
         <Route path="/" element={<Login />}></Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 export default App;

@@ -16,7 +16,7 @@ function Update() {
     getDetails();
   }, []);
   const getDetails = async () => {
-    await fetch("https://crudd-id2m.onrender.com/getDetails/" + params.id)
+    await fetch("https://localhost:5000/getDetails/" + params.id)
       .then((res) => res.json())
       .then((rec) => {
         console.log(rec);
@@ -45,7 +45,7 @@ function Update() {
       ? setCPass({ type: "text", CbtnName: "Hide password" })
       : setCPass({ type: "password", CbtnName: "show password" });
   };
-  const handler = (e) => {
+  const handler = (e: any) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   const submitData = () => {
@@ -69,13 +69,16 @@ function Update() {
         .then((json) => {
           console.log(json);
           setState(json);
-          document.getElementById("result").innerHTML =
-            "Update successfully!!!";
+          const result = document.getElementById(
+            "result"
+          ) as HTMLDivElement | null;
+          if (result) {
+            result.innerHTML = "Update successfully!!!";
+          }
         })
         .catch(() => console.log("api call error"));
     } else {
-      document.getElementById("result").innerHTML =
-        "Password and Confirm password dosent match";
+      console.log("Password and Confirm password dosent match");
     }
   };
   return (
@@ -138,7 +141,7 @@ function Update() {
               className="form-control p-2 px-3 my-3"
               placeholder="Your ConfirmPassword.."
               name="conPassword"
-              value={state.ConPassword}
+              value={state.conPassword}
               onChange={handler}
             />
 
@@ -157,9 +160,9 @@ function Update() {
 
             <div className="form-group mb-3">
               <textarea
-                type="address"
+                // type="address"
                 className="form-control"
-                rows="3"
+                rows={3}
                 placeholder="Your Address Here.."
                 name="address"
                 value={state.address}
